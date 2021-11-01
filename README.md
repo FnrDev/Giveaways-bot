@@ -1,4 +1,4 @@
-# slash-command by Fnr#0017
+# Giveaways bot by Fnr#0017
 
 ## Simple Discord Giveaways bot
 
