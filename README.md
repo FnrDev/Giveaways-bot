@@ -1,6 +1,6 @@
 # slash-command by Fnr#0017
 
-## slash commands handler to make your bot support slash commands features.
+## Simple Discord Giveaways bot
 
 ---
 ### Note: Node.js 16.6.0 or newer is required.
