@@ -15,7 +15,7 @@ npm install
 ---
 ### You need to rename example.env file to `.env` and fill the info.
 
-- config.json
+- .env
 ```sh
 token=YOUR_DISCORD_BOT_TOKEN
 botID=YOUR_BOT_ID
