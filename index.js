@@ -22,6 +22,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
 		botsCanWin: false,
 		embedColor: "#00FFC1",
 		reaction: "🎉",
+		embedColorEnd: "#ff0000",
 		lastChance: {
 			enabled: true,
 			content: "⚠️ **LAST CHANCE TO ENTER !** ⚠️",
