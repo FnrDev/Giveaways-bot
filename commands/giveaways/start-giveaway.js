@@ -42,9 +42,11 @@ module.exports = {
             prize: prize,
             winnerCount: winner,
             hostedBy: interaction.user,
-            utils
+            messages: {
+                drawing: `End At: {timestamp}`,
+                endedAt: "Ended At"
+            }
         });
-        console.log(giveaway.options)
         interaction.reply(`<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`)
     }
 }
