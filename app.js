@@ -3,6 +3,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { readdirSync } = require('fs');
 require('colors');
+require('dotenv').config();
 
 // setup slash commands
 const commands = []
