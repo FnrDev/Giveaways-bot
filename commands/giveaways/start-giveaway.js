@@ -1,4 +1,5 @@
 const ms = require('ms');
+const utils = require('../../utils/config');
 
 module.exports = {
     name: "start",
@@ -36,11 +37,15 @@ module.exports = {
         const duration = interaction.options.getString('duration');
         const winner = interaction.options.getInteger('winners');
         const prize = interaction.options.getString('prize');
-        client.giveawaysManager.start(channel, {
+       const giveaway = await client.giveawaysManager.start(channel, {
             duration: ms(duration),
             prize: prize,
             winnerCount: winner,
-            hostedBy: interaction.user
+            hostedBy: interaction.user,
+            messages: {
+                drawing: `End At: {timestamp}`,
+                endedAt: "Ended At"
+            }
         });
         interaction.reply(`<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`)
     }
