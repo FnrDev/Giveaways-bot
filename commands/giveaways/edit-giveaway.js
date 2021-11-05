@@ -47,7 +47,7 @@ module.exports = {
         }
         if (duration) {
             await client.giveawaysManager.edit(giveawayID, {
-                newExtraData: ms(duration)
+                addTime: ms(duration)
             });
             return interaction.reply({ content: "✅ Giveaway has been edited" })
         }
