@@ -44,7 +44,8 @@ module.exports = {
             hostedBy: interaction.user,
             messages: {
                 drawing: `End At: {timestamp}`,
-                endedAt: "Ended At"
+                endedAt: "Ended At",
+                winMessage: `🎉🎉 Congratulations, {winners}! You won **{this.prize}**!🎉🎉\n{this.messageURL}`
             }
         });
         interaction.reply(`<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`)
