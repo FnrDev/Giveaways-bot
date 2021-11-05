@@ -11,7 +11,7 @@ module.exports = {
             required: true
         }
     ],
-    permissions: "MANAGE_MESSAGES",
+    giveawayPerms: true,
     run: async(interaction, client) => {
         const query = interaction.options.getString('giveaway');
         const giveaway = client.giveawaysManager.giveaways.find((g) => g.prize === query && g.guildId === interaction.guild.id) || client.giveawaysManager.giveaways.find((g) => g.messageId === query && g.guildId === interaction.guild.id);

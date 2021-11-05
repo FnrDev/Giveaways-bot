@@ -18,7 +18,7 @@ module.exports = async(client, interaction) => {
 				}
 			}
 			if (command.permissions) {
-				if (!interaction.member.permissions.has(command.permissions) && !interaction.member.roles.cache.some((r) => r.name === 'Giveaways')) {
+				if (!interaction.member.permissions.has(command.permissions)) {
 					const embed = new MessageEmbed()
 					.setTitle('Missing Permission')
 					.setDescription(`:x: You need \`${command.permissions}\` to use this command`)
@@ -36,6 +36,17 @@ module.exports = async(client, interaction) => {
 			if (command.ownerOnly) {
 				if (interaction.user.id !== interaction.guild.ownerId) {
 					return interaction.reply({ content: "Only ownership of this server can use this command", ephemeral: true })
+				}
+			}
+			if (command.giveawayPerms) {
+				if (!interaction.member.roles.cache.some(r => r.name === 'Giveaway') && !interaction.member.permissions.has('MANAGE_MESSAGES')) {
+					const embed = new MessageEmbed()
+					.setTitle('Missing Permission')
+					.setDescription(`:x: You need \`Giveaway\` role or \`MANAGE MESSAGES\` Permission to use this command.`)
+					.setColor('#ff0000')
+					.setFooter(interaction.user.tag, interaction.user.displayAvatarURL({ dynamic: true }))
+					.setTimestamp()
+					return interaction.reply({ embeds: [embed], ephemeral: true })
 				}
 			}
 			command.run(interaction, client);

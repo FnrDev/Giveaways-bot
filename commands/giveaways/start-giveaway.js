@@ -1,5 +1,4 @@
 const ms = require('ms');
-const utils = require('../../utils/config');
 
 module.exports = {
     name: "start",
@@ -31,7 +30,7 @@ module.exports = {
             required: true
         }
     ],
-    permissions: "MANAGE_MESSAGES",
+    giveawayPerms: true,
     run: async(interaction, client) => {
         const channel = interaction.options.getChannel('channel');
         const duration = interaction.options.getString('duration');
