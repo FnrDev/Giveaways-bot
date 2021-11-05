@@ -3,6 +3,7 @@ const Discord = require('discord.js')
 module.exports = {
     name: "ping",
     description: "Get bot speed",
+    usage: "/ping",
     timeout: 5000,
     run: async(interaction, client) => {
         await interaction.reply('🏓 Pong!')

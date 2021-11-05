@@ -3,6 +3,7 @@ const ms = require('ms');
 module.exports = {
     name: "start",
     description: "Starts a giveaway.",
+    usage: "/start duration:**1m** winners:**5** prize:**VIP Role** channel:**#giveaway**",
     options: [
         {
             name: "duration",

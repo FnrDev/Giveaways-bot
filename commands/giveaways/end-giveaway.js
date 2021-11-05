@@ -3,6 +3,7 @@ const ms = require('ms');
 module.exports = {
     name: "end",
     description: "End a giveaway",
+    usage: "/end <message id / giveaway prize>",
     options: [
         {
             name: "giveaway",
