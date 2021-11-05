@@ -37,7 +37,7 @@ module.exports = {
         const duration = interaction.options.getString('duration');
         const winner = interaction.options.getInteger('winners');
         const prize = interaction.options.getString('prize');
-       const giveaway = await client.giveawaysManager.start(channel, {
+        await client.giveawaysManager.start(channel, {
             duration: ms(duration),
             prize: prize,
             winnerCount: winner,
