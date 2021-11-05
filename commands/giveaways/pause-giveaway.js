@@ -3,6 +3,7 @@ const ms = require("ms");
 module.exports = {
     name: "pause",
     description: "Pause a giveaway",
+    usage: "/pause <message id / giveaway prize>",
     options: [
         {
             name: "giveaway",

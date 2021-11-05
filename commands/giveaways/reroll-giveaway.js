@@ -1,6 +1,7 @@
 module.exports = {
     name: "reroll",
     description: "Reroll a giveaway",
+    usage: "/reroll <message id or giveaway prize>",
     options: [
         {
             name: "giveaway",

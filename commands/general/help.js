@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: "help",
     description: "Shows all bot commands",
+    usage: "/help command:**ping**",
     options: [
         {
             name: "command",
