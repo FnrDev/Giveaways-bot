@@ -39,7 +39,7 @@ module.exports = async(client, interaction) => {
 				}
 			}
 			if (command.giveawayPerms) {
-				if (!interaction.member.roles.cache.some(r => r.name === 'Giveaway') && !interaction.member.permissions.has('MANAGE_MESSAGES')) {
+				if (!interaction.member.roles.cache.some(r => r.name.toLowerCase() === 'giveaway') && !interaction.member.permissions.has('MANAGE_MESSAGES')) {
 					const embed = new MessageEmbed()
 					.setTitle('Missing Permission')
 					.setDescription(`:x: You need \`Giveaway\` role or \`MANAGE MESSAGES\` Permission to use this command.`)
