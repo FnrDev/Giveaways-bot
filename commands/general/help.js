@@ -27,13 +27,13 @@ module.exports = {
         client.commands.forEach(cmd => {
             if (cmd.name === 'help') return;
             if (!cmd.description) return;
-            loopAllCommands += `\`${cmd.name}\` - ${cmd.description}\n`;
+            loopAllCommands += `\`/${cmd.name}\` - ${cmd.description}\n`;
         });
         const embed = new MessageEmbed()
         .setColor(interaction.member.displayHexColor)
         .setTitle("All commands")
         .setDescription(loopAllCommands)
-        .setFooter(`Requested by ${interaction.user.tag}`);
+        .setFooter(`Requested by ${interaction.user.tag}`, interaction.user.displayAvatarURL({ dynamic: true }));
         return interaction.reply({ embeds: [embed] });
     }
 }
