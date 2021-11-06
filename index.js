@@ -9,6 +9,8 @@ const client = new Discord.Client({
 require('dotenv').config();
 client.commands = new Discord.Collection();
 const { GiveawaysManager } = require('discord-giveaways');
+require('colors');
+const fs = require('fs');
 
 // setup giveaway manager config
 client.giveawaysManager = new GiveawaysManager(client, {
@@ -31,5 +33,13 @@ const arr = ["handlers", "events"]
 arr.forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
+
+const giveawayEvents = fs.readdirSync('./events/giveaways').filter(file => file.endsWith('.js'));
+
+for (const file of giveawayEvents) {
+    console.log(`[Giveaways Events] Loading giveaways event: ${file}`.yellow);
+    const event = require(`./events/giveaways/${file}`);
+    client.giveawaysManager.on(file.split(".")[0], event.bind(null, client));
+};
 
 client.login(process.env.token);
