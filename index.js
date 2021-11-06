@@ -16,7 +16,6 @@ const database = new mysql();
 
 // setup giveaway manager config
 client.giveawaysManager = new GiveawaysManager(client, {
-	storage: "./giveaways.json",
 	default: {
 		botsCanWin: false,
 		embedColor: "#00FFC1",
