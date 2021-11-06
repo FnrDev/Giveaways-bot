@@ -11,6 +11,8 @@ client.commands = new Discord.Collection();
 const { GiveawaysManager } = require('discord-giveaways');
 require('colors');
 const fs = require('fs');
+const mysql = require('mysql-database');
+const database = new mysql();
 
 // setup giveaway manager config
 client.giveawaysManager = new GiveawaysManager(client, {
@@ -23,7 +25,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
 		lastChance: {
 			enabled: true,
 			content: "⚠️ **LAST CHANCE TO ENTER !** ⚠️",
-			threshold: 5000,
+			threshold: 10000,
 			embedColor: "#FF0000"
 		}
 	}
@@ -34,12 +36,25 @@ arr.forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
+// loop giveaways events files
 const giveawayEvents = fs.readdirSync('./events/giveaways').filter(file => file.endsWith('.js'));
-
 for (const file of giveawayEvents) {
     console.log(`[Giveaways Events] Loading giveaways event: ${file}`.yellow);
     const event = require(`./events/giveaways/${file}`);
     client.giveawaysManager.on(file.split(".")[0], event.bind(null, client));
 };
+
+// setup database
+(async () => {
+	const db = await database.connect({
+        host: process.env.host,
+        user: process.env.user,
+        database: process.env.database
+    });
+    db.on('connected', () => {
+        console.log('[DataBase] DataBase Connected'.green)
+    });
+    db.create("giveaways")
+})();
 
 client.login(process.env.token);
