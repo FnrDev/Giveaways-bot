@@ -1,4 +1,5 @@
 const ms = require('ms');
+const Discord = require('discord.js');
 
 module.exports = {
     name: "start",
@@ -37,7 +38,7 @@ module.exports = {
         const duration = interaction.options.getString('duration');
         const winner = interaction.options.getInteger('winners');
         const prize = interaction.options.getString('prize');
-        await client.giveawaysManager.start(channel, {
+        const giveawayInfo = await client.giveawaysManager.start(channel, {
             duration: ms(duration),
             prize: prize,
             winnerCount: winner,
@@ -48,6 +49,13 @@ module.exports = {
                 winMessage: `🎉🎉 Congratulations, {winners}! You won **{this.prize}**!🎉🎉\n{this.messageURL}`
             }
         });
-        interaction.reply(`<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`)
+        const row = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
+            .setStyle('LINK')
+            .setLabel('Giveaway URL')
+            .setURL(`https://discord.com/channels/${interaction.guild.id}/${giveawayInfo.channelId}/${giveawayInfo.messageId}`)
+        )
+        interaction.reply({ content: `<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`, components: [row] });
     }
 }
