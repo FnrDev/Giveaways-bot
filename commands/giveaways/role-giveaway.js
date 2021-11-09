@@ -1,10 +1,9 @@
 const ms = require('ms');
-const Discord = require('discord.js');
 
 module.exports = {
-    name: "start",
-    description: "Starts a giveaway.",
-    usage: "/start duration:**1m** winners:**5** prize:**VIP Role** channel:**#giveaway**",
+    name: "start-role",
+    description: "Starts a giveaway with specific role to participate.",
+    usage: "/start-role duration:**1m** winners:**5** prize:**VIP Role** role:**@members** channel:**#giveaway**",
     options: [
         {
             name: "duration",
@@ -25,6 +24,12 @@ module.exports = {
             required: true
         },
         {
+            name: "role",
+            description: "Require role to participate in the giveaway.",
+            type: 8,
+            required: true
+        },
+        {
             name: "channel",
             description: "The channel to start the giveaway in.",
             type: 7,
@@ -38,24 +43,19 @@ module.exports = {
         const duration = interaction.options.getString('duration');
         const winner = interaction.options.getInteger('winners');
         const prize = interaction.options.getString('prize');
-        const giveawayInfo = await client.giveawaysManager.start(channel, {
+        const role = interaction.options.getRole('role');
+        await client.giveawaysManager.start(channel, {
             duration: ms(duration),
             prize: prize,
             winnerCount: winner,
             hostedBy: interaction.user,
+            exemptMembers: (member) => !member.roles.cache.some(r => r.id === role.id),
             messages: {
                 drawing: `End At: {timestamp}`,
                 endedAt: "Ended At",
                 winMessage: `🎉🎉 Congratulations, {winners}! You won **{this.prize}**!🎉🎉\n{this.messageURL}`
             }
         });
-        const row = new Discord.MessageActionRow()
-        .addComponents(
-            new Discord.MessageButton()
-            .setStyle('LINK')
-            .setLabel('Giveaway URL')
-            .setURL(`https://discord.com/channels/${interaction.guild.id}/${giveawayInfo.channelId}/${giveawayInfo.messageId}`)
-        )
-        interaction.reply({ content: `<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`, components: [row] });
+        interaction.reply(`<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`)
     }
 }
