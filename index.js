@@ -11,8 +11,6 @@ client.commands = new Discord.Collection();
 const { GiveawaysManager } = require('discord-giveaways');
 require('colors');
 const fs = require('fs');
-const mysql = require('mysql-database');
-const database = new mysql();
 
 // setup giveaway manager config
 client.giveawaysManager = new GiveawaysManager(client, {
@@ -42,18 +40,5 @@ for (const file of giveawayEvents) {
     const event = require(`./events/giveaways/${file}`);
     client.giveawaysManager.on(file.split(".")[0], event.bind(null, client));
 };
-
-// setup database
-(async () => {
-	const db = await database.connect({
-        host: process.env.host,
-        user: process.env.user,
-        database: process.env.database
-    });
-    db.on('connected', () => {
-        console.log('[DataBase] DataBase Connected'.green)
-    });
-    db.create("giveaways")
-})();
 
 client.login(process.env.token);
