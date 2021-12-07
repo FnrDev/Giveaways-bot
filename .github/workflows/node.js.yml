@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
     - run: npm run deploy
     - run: npm run start
       env:
-          token: ${{secrets.token}}
-          serverID: ${{secrets.serverID}}
-          botID: ${{secrets.botID}}
-          log: ${{secrets.log}}
+        token: ${{secrets.token}}
+        serverID: ${{secrets.serverID}}
+        botID: ${{secrets.botID}}
+        log: ${{secrets.log}}
