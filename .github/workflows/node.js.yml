@@ -26,3 +26,8 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: node .
+      env:
+          token: ${{secrets.token}}
+          serverID: ${{secrets.serverID}}
+          botID: ${{secrets.botID}}
+          log: ${{secrets.log}}
