@@ -12,12 +12,6 @@ module.exports = {
             required: true
         },
         {
-            name: "winners",
-            description: "How many winners the giveaway should have.",
-            type: 4,
-            required: true
-        },
-        {
             name: "prize",
             description: "What the prize of the giveaway should be.",
             type: 3,
@@ -30,18 +24,22 @@ module.exports = {
             required: true
         },
         {
+            name: "winners",
+            description: "How many winners the giveaway should have.",
+            type: 4,
+        },
+        {
             name: "channel",
             description: "The channel to start the giveaway in.",
             type: 7,
-            channel_types: [0, 5, 6],
-            required: true
+            channel_types: [0, 5, 6]
         }
     ],
     giveawayPerms: true,
     run: async(interaction, client) => {
-        const channel = interaction.options.getChannel('channel');
+        const channel = interaction.options.getChannel('channel') || interaction.channel;
         const duration = interaction.options.getString('duration');
-        const winner = interaction.options.getInteger('winners');
+        const winner = interaction.options.getInteger('winners') || 1;
         const prize = interaction.options.getString('prize');
         const role = interaction.options.getRole('role');
         await client.giveawaysManager.start(channel, {
@@ -53,7 +51,8 @@ module.exports = {
             messages: {
                 drawing: `End At: {timestamp}`,
                 endedAt: "Ended At",
-                winMessage: `🎉🎉 Congratulations, {winners}! You won **{this.prize}**!🎉🎉\n{this.messageURL}`
+                winMessage: `🎉🎉 Congratulations, {winners}! You won **{this.prize}**!🎉🎉\n{this.messageURL}`,
+                giveaway: `🎉🎉 **GIVEAWAY** 🎉🎉\n⚠ Required **${role.name}** role to participate.`
             }
         });
         interaction.reply(`<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`)

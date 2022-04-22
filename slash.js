@@ -12,7 +12,7 @@ readdirSync("./commands/").map(async dir => {
 	commands.push(require(path.join(__dirname, `./commands/${dir}/${cmd}`)))
     })
 })
-const rest = new REST({ version: "9" }).setToken(process.env.token);
+const rest = new REST({ version: "10" }).setToken(process.env.token);
 
 (async () => {
 	try {

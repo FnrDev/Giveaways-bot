@@ -13,30 +13,28 @@ module.exports = {
             required: true
         },
         {
-            name: "winners",
-            description: "How many winners the giveaway should have.",
-            type: 4,
-            required: true
-        },
-        {
             name: "prize",
             description: "What the prize of the giveaway should be.",
             type: 3,
             required: true
         },
         {
+            name: "winners",
+            description: "How many winners the giveaway should have.",
+            type: 4,
+        },
+        {
             name: "channel",
             description: "The channel to start the giveaway in.",
             type: 7,
             channel_types: [0, 5, 6],
-            required: true
         }
     ],
     giveawayPerms: true,
     run: async(interaction, client) => {
-        const channel = interaction.options.getChannel('channel');
+        const channel = interaction.options.getChannel('channel') || interaction.channel;
         const duration = interaction.options.getString('duration');
-        const winner = interaction.options.getInteger('winners');
+        const winner = interaction.options.getInteger('winners') || 1;
         const prize = interaction.options.getString('prize');
         const giveawayInfo = await client.giveawaysManager.start(channel, {
             duration: ms(duration),
@@ -54,7 +52,7 @@ module.exports = {
             new Discord.MessageButton()
             .setStyle('LINK')
             .setLabel('Giveaway URL')
-            .setURL(`https://discord.com/channels/${interaction.guild.id}/${giveawayInfo.channelId}/${giveawayInfo.messageId}`)
+            .setURL(giveawayInfo.messageURL)
         )
         interaction.reply({ content: `<a:CH_Giveaway:703849482806099968> **Giveaway Started in ${channel}**`, components: [row] });
     }

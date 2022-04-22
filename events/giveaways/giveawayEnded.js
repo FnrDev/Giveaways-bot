@@ -7,11 +7,12 @@ module.exports = async(client, giveaway, winners) => {
     winners.forEach(member => {
         winnersText += `<@${member.user.id}> `
     })
+    if (winners.length === 0) winnersText = 'No winners'
     const embed = new Discord.MessageEmbed()
     .setTitle('Giveaway Ended')
     .setColor('#00FFC1')
     .setTimestamp()
-    .setFooter(giveaway.messageId)
+    .setFooter({ text: giveaway.messageId })
     .addFields(
         {
             name: "Hosted By:",

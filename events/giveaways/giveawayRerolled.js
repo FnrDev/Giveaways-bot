@@ -11,7 +11,7 @@ module.exports = async(client, giveaway, winners) => {
     .setTitle('Giveaway Rerolled')
     .setColor('#00FFC1')
     .setTimestamp()
-    .setFooter(giveaway.messageId)
+    .setFooter({ text: giveaway.messageId })
     .addFields(
         {
             name: "Hosted By:",
