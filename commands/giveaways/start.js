@@ -1,5 +1,6 @@
 const ms = require('ms');
 const Discord = require('discord.js');
+const messages = require('../../util/messages');
 
 module.exports = {
     name: "start",
@@ -41,11 +42,7 @@ module.exports = {
             prize: prize,
             winnerCount: winner,
             hostedBy: interaction.user,
-            messages: {
-                drawing: `End At: {timestamp}`,
-                endedAt: "Ended At",
-                winMessage: `🎉🎉 Congratulations, {winners}! You won **{this.prize}**!🎉🎉\n{this.messageURL}`
-            }
+            messages
         });
         const row = new Discord.MessageActionRow()
         .addComponents(
