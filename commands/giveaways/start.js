@@ -1,6 +1,7 @@
 const ms = require('ms');
 const Discord = require('discord.js');
 const messages = require('../../util/messages');
+const settings = require('../../settings.json');
 
 module.exports = {
     name: "start",
@@ -42,6 +43,8 @@ module.exports = {
             prize: prize,
             winnerCount: winner,
             hostedBy: interaction.user,
+            banner: settings.bannerURL,
+            thumbnail: interaction.guild.iconURL(),
             messages
         });
         const row = new Discord.MessageActionRow()
