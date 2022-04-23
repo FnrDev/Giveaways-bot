@@ -6,7 +6,7 @@ module.exports = async(client, giveaway) => {
     const embed = new Discord.MessageEmbed()
     .setTitle('Giveaway Deleted')
     .setColor('#00FFC1')
-    .setFooter(giveaway.messageId)
+    .setFooter({ text: giveaway.messageId })
     .setTimestamp()
     .addFields(
         {

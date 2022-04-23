@@ -14,7 +14,7 @@ module.exports = {
         const giveawayId = interaction.options.getString('message_id');
         const fetchGiveaway = client.giveawaysManager.giveaways.find(r => r.messageId === giveawayId);
         if (!fetchGiveaway) {
-            return interaction.reply({ content: `Unable to find giveaway \`${giveawayID}\``, ephemeral: true });
+            return interaction.reply({ content: `Unable to find giveaway \`${giveawayId}\``, ephemeral: true });
         }
         await client.giveawaysManager.delete(giveawayId);
         interaction.reply({ content: `✅ Successfully deleted giveaway with id \`${giveawayId}\`` })

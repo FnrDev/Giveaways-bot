@@ -36,26 +36,40 @@ module.exports = {
         if (!fetchGiveaway) {
             return interaction.reply({ content: `Unable to find giveaway \`${giveawayID}\``, ephemeral: true });
         }
+
+        // check if the giveaway is ended
         if (fetchGiveaway.ended) {
             return interaction.reply({ content: `You can\'t edit a ended giveaway`, ephemeral: true });
         }
+
+        // check if winners option has been selected
         if (winners) {
             await client.giveawaysManager.edit(giveawayID, {
                 newWinnerCount: winners
             });
             return interaction.reply({ content: "✅ Giveaway has been edited" })
         }
+
+        // check if duration option has been selected
         if (duration) {
             await client.giveawaysManager.edit(giveawayID, {
                 addTime: ms(duration)
             });
             return interaction.reply({ content: "✅ Giveaway has been edited" })
         }
+
+        // check if prize option has been selected
         if (prize) {
             await client.giveawaysManager.edit(giveawayID, {
                 newPrize: prize
             });
             return interaction.reply({ content: "✅ Giveaway has been edited" })
         }
+
+        // reply if there no options selected
+        return interaction.reply({
+            content: ':x: You need to select one option at least',
+            ephemeral: true
+        })
     }
 }

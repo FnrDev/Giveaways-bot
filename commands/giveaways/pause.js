@@ -15,7 +15,8 @@ module.exports = {
     giveawayPerms: true,
     run: async(interaction, client) => {
         const query = interaction.options.getString('giveaway');
-        const giveaway = client.giveawaysManager.giveaways.find((g) => g.prize === query && g.guildId === interaction.guild.id) || client.giveawaysManager.giveaways.find((g) => g.messageId === query && g.guildId === interaction.guild.id);
+        const giveaway = client.giveawaysManager.giveaways.find((g) => g.prize === query && g.guildId === interaction.guild.id) ||
+        client.giveawaysManager.giveaways.find((g) => g.messageId === query && g.guildId === interaction.guild.id);
         if (!giveaway) {
             return interaction.reply({ content: `i can\'t find a giveaway for \`${query}\``, ephemeral: true });
         }

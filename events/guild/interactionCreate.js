@@ -23,7 +23,7 @@ module.exports = async(client, interaction) => {
 					.setTitle('Missing Permission')
 					.setDescription(`:x: You need \`${command.permissions}\` to use this command`)
 					.setColor('#ff0000')
-					.setFooter(interaction.user.tag, interaction.user.displayAvatarURL({ dynamic: true }))
+					.setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
 					.setTimestamp()
 					return interaction.reply({ embeds: [embed], ephemeral: true })
 				}
@@ -44,7 +44,7 @@ module.exports = async(client, interaction) => {
 					.setTitle('Missing Permission')
 					.setDescription(`:x: You need \`Giveaway\` role or \`MANAGE MESSAGES\` Permission to use this command.`)
 					.setColor('#ff0000')
-					.setFooter(interaction.user.tag, interaction.user.displayAvatarURL({ dynamic: true }))
+					.setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
 					.setTimestamp()
 					return interaction.reply({ embeds: [embed], ephemeral: true })
 				}
